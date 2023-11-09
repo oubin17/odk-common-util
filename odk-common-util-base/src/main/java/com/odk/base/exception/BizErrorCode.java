@@ -72,16 +72,16 @@ public enum BizErrorCode implements BaseErrorCode {
 
     @Override
     public String getErrorType() {
-        return null;
+        return errorType;
     }
 
     @Override
     public String getCode() {
-        return null;
+        return code;
     }
 
     @Override
     public String getErrorContext() {
-        return null;
+        return errorContext;
     }
 }
