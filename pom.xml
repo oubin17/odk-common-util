@@ -17,6 +17,8 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <java.version>1.8</java.version>
     <skipTests>true</skipTests>
+
+    <commons-lang>3.13.0</commons-lang>
   </properties>
 
   <dependencyManagement>
@@ -24,11 +26,12 @@
   </dependencyManagement>
 
   <dependencies>
+
+    <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>${commons-lang}</version>
     </dependency>
   </dependencies>
   <build>
