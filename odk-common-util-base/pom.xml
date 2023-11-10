@@ -8,6 +8,7 @@
     </parent>
 
     <artifactId>odk-common-util-base</artifactId>
+    <version>${odk-common-util-base}</version>
     <packaging>jar</packaging>
 
     <name>odk-common-util-base</name>
