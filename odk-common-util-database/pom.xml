@@ -2,30 +2,24 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.odk</groupId>
-  <artifactId>odk-common-util</artifactId>
+  <groupId>org.example</groupId>
+  <artifactId>odk-common-util-database</artifactId>
   <version>1.0-SNAPSHOT</version>
-  <packaging>pom</packaging>
+  <packaging>jar</packaging>
 
-  <name>odk-common-util</name>
-  <!--  <url>http://maven.apache.org</url>-->
+  <name>odk-common-util-database</name>
+  <url>http://maven.apache.org</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <java.version>1.8</java.version>
-    <skipTests>true</skipTests>
-    <odk-common-util-base>1.0-SNAPSHOT</odk-common-util-base>
-
   </properties>
 
-  <dependencyManagement>
-
-  </dependencyManagement>
-
   <dependencies>
-
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
-  <build>
-
-  </build>
 </project>
