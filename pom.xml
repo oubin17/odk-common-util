@@ -17,6 +17,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <java.version>1.8</java.version>
     <skipTests>true</skipTests>
+    <odk-common-util-base>1.0-SNAPSHOT</odk-common-util-base>
 
     <commons-lang>3.13.0</commons-lang>
   </properties>
