@@ -1,4 +1,4 @@
-package com.odk.base.dto.response;
+package com.odk.base.vo.response;
 
 import com.odk.base.exception.BizErrorCode;
 

@@ -1,20 +1,13 @@
 package com.odk.base.dto;
 
-import java.io.Serializable;
-
 /**
  * DTO
  *
- * @Description:
- * @CreateDate: 2023/11/9 20:42
- * @Version: 1.0
- * @Author: oubin
+ * @description:
+ * @version: 1.0
+ * @author: oubin on 2023/11/11
  */
-public abstract class DTO implements Serializable {
+public abstract class DTO {
 
-    private static final long serialVersionUID = 8242875568499294976L;
-
-    public DTO() {
-
-    }
+    protected DTO(){}
 }

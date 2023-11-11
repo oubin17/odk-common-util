@@ -1,6 +1,6 @@
-package com.odk.base.dto.response;
+package com.odk.base.vo.response;
 
-import com.odk.base.dto.DTO;
+import com.odk.base.vo.VO;
 
 /**
  * BaseResponse
@@ -10,7 +10,7 @@ import com.odk.base.dto.DTO;
  * @Version: 1.0
  * @Author: oubin
  */
-public class BaseResponse extends DTO {
+public class BaseResponse extends VO {
     private static final long serialVersionUID = -3297973896762998365L;
 
     private boolean success;

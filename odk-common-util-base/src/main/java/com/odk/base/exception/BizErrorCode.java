@@ -1,7 +1,7 @@
 package com.odk.base.exception;
 
 import com.odk.base.constant.ErrorTypes;
-import com.odk.base.dto.interfaces.BaseErrorCode;
+import com.odk.base.vo.interfaces.BaseErrorCode;
 import org.apache.commons.lang3.StringUtils;
 
 import static com.odk.base.constant.ErrorTypes.*;

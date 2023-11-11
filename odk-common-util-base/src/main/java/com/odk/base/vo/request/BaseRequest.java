@@ -1,6 +1,6 @@
-package com.odk.base.dto.request;
+package com.odk.base.vo.request;
 
-import com.odk.base.dto.DTO;
+import com.odk.base.vo.VO;
 
 /**
  * BaseRequest
@@ -10,6 +10,6 @@ import com.odk.base.dto.DTO;
  * @Version: 1.0
  * @Author: oubin
  */
-public class BaseRequest extends DTO {
+public class BaseRequest extends VO {
     private static final long serialVersionUID = -5801639508072302361L;
 }

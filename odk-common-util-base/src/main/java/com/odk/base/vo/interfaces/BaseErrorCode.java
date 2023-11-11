@@ -1,4 +1,4 @@
-package com.odk.base.dto.interfaces;
+package com.odk.base.vo.interfaces;
 
 /**
  * BaseErrorCode
