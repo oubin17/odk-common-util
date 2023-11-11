@@ -17,7 +17,7 @@ public class BaseResponse extends DTO {
 
     private String errorType;
 
-    private String code;
+    private String errorCode;
 
     private String errorContext;
 
@@ -37,12 +37,12 @@ public class BaseResponse extends DTO {
         this.errorType = errorType;
     }
 
-    public String getCode() {
-        return code;
+    public String getErrorCode() {
+        return errorCode;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setErrorCode(String errorCode) {
+        this.errorCode = errorCode;
     }
 
     public String getErrorContext() {

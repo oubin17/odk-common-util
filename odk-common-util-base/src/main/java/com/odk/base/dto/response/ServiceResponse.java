@@ -33,7 +33,7 @@ public class ServiceResponse<T> extends BaseResponse {
         response.data = value;
         response.setSuccess(true);
         response.setErrorType(BizErrorCode.SUCCESS.getErrorType());
-        response.setCode(BizErrorCode.SUCCESS.getCode());
+        response.setErrorCode(BizErrorCode.SUCCESS.getCode());
         response.setErrorContext(null);
         return response;
     }
@@ -51,10 +51,29 @@ public class ServiceResponse<T> extends BaseResponse {
         ServiceResponse<T> response = new ServiceResponse<>();
         response.setSuccess(false);
         response.setErrorType(resultCode.getErrorType());
-        response.setCode(resultCode.getCode());
+        response.setErrorCode(resultCode.getCode());
         response.setErrorContext(errorContext);
         return response;
     }
+
+    public static <T> ServiceResponse<T> valueOfError(String errorType, String errorCode, String errorContext) {
+        ServiceResponse<T> response = new ServiceResponse<>();
+        response.setSuccess(false);
+        response.setErrorType(errorType);
+        response.setErrorCode(errorCode);
+        response.setErrorContext(errorContext);
+        return response;
+    }
+    public static <T> ServiceResponse<T> valueOf(ServiceResponse preResponse) {
+        ServiceResponse<T> response = new ServiceResponse<>();
+        response.setSuccess(preResponse.isSuccess());
+        response.setErrorType(preResponse.getErrorType());
+        response.setErrorCode(preResponse.getErrorCode());
+        response.setErrorContext(preResponse.getErrorContext());
+        return response;
+    }
+
+
 
     /**
      *  add the returned extension information
