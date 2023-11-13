@@ -36,10 +36,23 @@ public class DataSourceSelector {
         dataSource.setUsername(databaseConfiguration.getUser());
         dataSource.setPassword(databaseConfiguration.getPassword());
         //连接池的其他的属性。。。
-//        dataSource.setInitialSize();
-        dataSource.setMaxActive(5);
-        //...
-        LOGGER.info("init datasource end");
+        dataSource.setName("DataSource-Druid");
+        dataSource.setInitialSize(databaseConfiguration.getInitialSize());
+        dataSource.setMinIdle(databaseConfiguration.getMinIdle());
+        dataSource.setMaxActive(databaseConfiguration.getMaxActive());
+        dataSource.setMaxWait(databaseConfiguration.getMaxWait());
+        dataSource.setPoolPreparedStatements(databaseConfiguration.isPoolPreparedStatements());
+        dataSource.setMaxPoolPreparedStatementPerConnectionSize(databaseConfiguration.getMaxPoolPreparedStatementPreConnectionSize());
+        dataSource.setValidationQuery(databaseConfiguration.getValidationQuery());
+        dataSource.setValidationQueryTimeout(databaseConfiguration.getValidationQueryTimeout());
+        dataSource.setTestOnBorrow(databaseConfiguration.isTestOnBorrow());
+        dataSource.setTestOnReturn(databaseConfiguration.isTestOnReturn());
+        dataSource.setTestWhileIdle(databaseConfiguration.isTestWhileIdle());
+        dataSource.setTimeBetweenEvictionRunsMillis(databaseConfiguration.getTimeBetweenEvictionRunsMillis());
+        dataSource.setMinEvictableIdleTimeMillis(databaseConfiguration.getMinEvictableIdleTImeMillis());
+        dataSource.setMaxEvictableIdleTimeMillis(databaseConfiguration.getMaxEvictableIdleTimeMillis());
+        dataSource.setUseGlobalDataSourceStat(databaseConfiguration.isUserGlobalDataSourceStat());
+//        dataSource.setConnectProperties(databaseConfiguration.getConnectionProperties());
         return dataSource;
     }
 
