@@ -1,0 +1,5 @@
+spring:
+  odk:
+    # 调用方需要配置数据库类型和连接方式
+    elasticsearch:
+      host-and-port: localhost:9200
