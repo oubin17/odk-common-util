@@ -1,6 +1,7 @@
 package com.odk.base.enums.user;
 
 import com.odk.base.enums.IEnum;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * PasswordTypeEnum
@@ -23,6 +24,24 @@ public enum IdentificationTypeEnum implements IEnum {
     IdentificationTypeEnum(String code, String description) {
         this.code = code;
         this.description = description;
+    }
+
+    /**
+     * 根据code获取枚举对象
+     *
+     * @param code
+     * @return
+     */
+    public static IdentificationTypeEnum getByCode(String code) {
+        if (StringUtils.isEmpty(code)) {
+            return null;
+        }
+        for (IdentificationTypeEnum identification : values()) {
+            if (identification.code.equals(code)) {
+                return identification;
+            }
+        }
+        return null;
     }
 
     @Override

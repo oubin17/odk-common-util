@@ -20,7 +20,12 @@ public enum BizErrorCode implements BaseErrorCode {
 
     PARAM_ILLEGAL(BIZ, "001", "request param illegal"),
 
-    SYSTEM_ERROR(SYSTEM, "003", "unknown system error")
+
+    USER_HAS_EXISTED(BIZ, "010", "user has existed"),
+
+
+    SYSTEM_ERROR(SYSTEM, "-100", "unknown system error")
+
 
     ;
 

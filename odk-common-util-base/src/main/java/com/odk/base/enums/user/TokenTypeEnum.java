@@ -1,6 +1,7 @@
 package com.odk.base.enums.user;
 
 import com.odk.base.enums.IEnum;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * TokenTypeEnum
@@ -25,6 +26,24 @@ public enum TokenTypeEnum implements IEnum {
     TokenTypeEnum(String code, String description) {
         this.code = code;
         this.description = description;
+    }
+
+    /**
+     * 根据code获取枚举对象
+     *
+     * @param code
+     * @return
+     */
+    public static TokenTypeEnum getByCode(String code) {
+        if (StringUtils.isEmpty(code)) {
+            return null;
+        }
+        for (TokenTypeEnum tokenType : values()) {
+            if (tokenType.code.equals(code)) {
+                return tokenType;
+            }
+        }
+        return null;
     }
 
     @Override

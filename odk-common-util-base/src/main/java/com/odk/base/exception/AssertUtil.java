@@ -48,4 +48,17 @@ public class AssertUtil {
             throw new BizException(errorCode);
         }
     }
+
+
+    public static void isFalse(boolean expression, BizErrorCode errorCode, String message) {
+        if (expression) {
+            throw new BizException(errorCode, message);
+        }
+    }
+
+    public static void isFalse(boolean expression, BizErrorCode errorCode) {
+        if (expression) {
+            throw new BizException(errorCode);
+        }
+    }
 }

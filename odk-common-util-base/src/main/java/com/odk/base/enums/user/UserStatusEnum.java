@@ -1,6 +1,7 @@
 package com.odk.base.enums.user;
 
 import com.odk.base.enums.IEnum;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * UserStatusEnum
@@ -26,6 +27,24 @@ public enum UserStatusEnum implements IEnum {
     UserStatusEnum(String code, String description) {
         this.code = code;
         this.description = description;
+    }
+
+    /**
+     * 根据code获取枚举对象
+     *
+     * @param code
+     * @return
+     */
+    public static UserStatusEnum getByCode(String code) {
+        if (StringUtils.isEmpty(code)) {
+            return null;
+        }
+        for (UserStatusEnum status : values()) {
+            if (status.code.equals(code)) {
+                return status;
+            }
+        }
+        return null;
     }
 
     @Override

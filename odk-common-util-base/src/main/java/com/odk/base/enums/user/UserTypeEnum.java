@@ -1,6 +1,7 @@
 package com.odk.base.enums.user;
 
 import com.odk.base.enums.IEnum;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * UserTypeEnum
@@ -25,6 +26,25 @@ public enum UserTypeEnum implements IEnum {
         this.code = code;
         this.description = description;
     }
+
+    /**
+     * 根据code获取枚举对象
+     *
+     * @param code
+     * @return
+     */
+    public static UserTypeEnum getByCode(String code) {
+        if (StringUtils.isEmpty(code)) {
+            return null;
+        }
+        for (UserTypeEnum userType : values()) {
+            if (userType.code.equals(code)) {
+                return userType;
+            }
+        }
+        return null;
+    }
+
 
     @Override
     public String getCode() {
