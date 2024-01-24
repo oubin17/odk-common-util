@@ -23,6 +23,14 @@ public enum BizErrorCode implements BaseErrorCode {
 
     USER_HAS_EXISTED(BIZ, "010", "user has existed"),
 
+    LOGIN_ID_DUPLICATE(BIZ, "011", "login id duplicate"),
+    USER_NOT_EXIST(BIZ, "012", "user not exist"),
+
+    IDENTIFICATION_NOT_MATCH(BIZ, "013", "identification not match"),
+
+    TOKEN_EXPIRED(BIZ, "020", "session expired"),
+
+    TOKEN_MISSING(BIZ, "021", "token missing"),
 
     SYSTEM_ERROR(SYSTEM, "-100", "unknown system error")
 
@@ -31,19 +39,19 @@ public enum BizErrorCode implements BaseErrorCode {
 
     private final String errorType;
 
-    private final String code;
+    private final String errorCode;
 
     private final String errorContext;
 
     /**
      *
      * @param errorType {@link ErrorTypes}
-     * @param code error code
+     * @param errorCode error code
      * @param errorContext error context
      */
-    BizErrorCode(String errorType, String code, String errorContext) {
+    BizErrorCode(String errorType, String errorCode, String errorContext) {
         this.errorType = errorType;
-        this.code = code;
+        this.errorCode = errorCode;
         this.errorContext = errorContext;
     }
 
@@ -57,7 +65,7 @@ public enum BizErrorCode implements BaseErrorCode {
             return null;
         }
         for (BizErrorCode errorCode : values()) {
-            if (StringUtils.equalsIgnoreCase(errorCode.code, code)) {
+            if (StringUtils.equalsIgnoreCase(errorCode.errorCode, code)) {
                 return errorCode;
             }
         }
@@ -81,8 +89,8 @@ public enum BizErrorCode implements BaseErrorCode {
     }
 
     @Override
-    public String getCode() {
-        return code;
+    public String getErrorCode() {
+        return errorCode;
     }
 
     @Override

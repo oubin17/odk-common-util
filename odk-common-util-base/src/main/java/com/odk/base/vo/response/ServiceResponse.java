@@ -33,7 +33,7 @@ public class ServiceResponse<T> extends BaseResponse {
         response.data = value;
         response.setSuccess(true);
         response.setErrorType(BizErrorCode.SUCCESS.getErrorType());
-        response.setErrorCode(BizErrorCode.SUCCESS.getCode());
+        response.setErrorCode(BizErrorCode.SUCCESS.getErrorCode());
         response.setErrorContext(null);
         return response;
     }
@@ -51,7 +51,7 @@ public class ServiceResponse<T> extends BaseResponse {
         ServiceResponse<T> response = new ServiceResponse<>();
         response.setSuccess(false);
         response.setErrorType(resultCode.getErrorType());
-        response.setErrorCode(resultCode.getCode());
+        response.setErrorCode(resultCode.getErrorCode());
         response.setErrorContext(errorContext);
         return response;
     }

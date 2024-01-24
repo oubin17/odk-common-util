@@ -20,7 +20,7 @@ public interface BaseErrorCode {
      * get error code
      * @return
      */
-    String getCode();
+    String getErrorCode();
 
     /**
      * get error context

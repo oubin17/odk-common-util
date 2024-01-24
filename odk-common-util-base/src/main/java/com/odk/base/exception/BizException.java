@@ -17,8 +17,13 @@ public class BizException extends BaseException {
         super(errMessage);
     }
 
+    public BizException(String errorCode, String errMessage) {
+        //todo
+    }
+
     public BizException(BizErrorCode errorCode) {
         super(errorCode.getErrorContext());
+        this.errorCode = errorCode;
     }
 
     public BizException(BizErrorCode errorCode, String errMessage) {
