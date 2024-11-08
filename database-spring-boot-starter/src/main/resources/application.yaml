@@ -8,6 +8,12 @@ spring:
       url: jdbc:mysql://localhost:3306?characterEncoding=utf8
       username: root
       password: 123456
+  jpa:
+    database: mysql # 数据库类型
+    database-platform: org.hibernate.dialect.MySQL57Dialect # 数据库方言
+    show-sql: true # 控制台打印SQL
+    hibernate:
+      ddl-auto: update # 根据实体类自动建表
 
   #  datasource:
   #    driver-class-name: com.mysql.cj.jdbc.Driver
@@ -36,3 +42,9 @@ spring:
     use-global-data-source-stat: true #是否使用统计
     connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000 #合并多个DruidDataSource的监控数据
 # ########## 连接池配置-结束 ##########
+
+##日志配置
+#logging:
+#  level:
+#    org.hibernate.SQL: DEBUG
+#    org.hibernate.type.descriptor.sql: TRACE
