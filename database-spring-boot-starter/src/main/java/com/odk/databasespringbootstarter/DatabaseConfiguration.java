@@ -9,7 +9,7 @@ import org.springframework.boot.SpringBootConfiguration;
  *
  * @description:
  * @version: 1.0
- * @author: oubin on 2023/11/12b
+ * @author: oubin on 2023/11/12
  */
 @Data
 @SpringBootConfiguration
