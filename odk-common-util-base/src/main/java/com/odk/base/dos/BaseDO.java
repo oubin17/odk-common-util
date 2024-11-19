@@ -1,13 +1,12 @@
 package com.odk.base.dos;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.EntityListeners;
-import jakarta.persistence.MappedSuperclass;
+import com.odk.base.listener.TenantEntityListener;
+import jakarta.persistence.*;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 
@@ -19,7 +18,8 @@ import java.time.LocalDateTime;
  * @author: oubin on 2024/1/18
  */
 @MappedSuperclass
-public class BaseDO extends DO {
+@EntityListeners(TenantEntityListener.class)
+public abstract class BaseDO extends DO {
 
     private static final long serialVersionUID = -5695130590258342820L;
     /**
@@ -39,7 +39,6 @@ public class BaseDO extends DO {
     @Column(name = "update_time")
     @LastModifiedDate
     private LocalDateTime updateTime;
-
 
     @Column(name = "update_by")
     @LastModifiedBy

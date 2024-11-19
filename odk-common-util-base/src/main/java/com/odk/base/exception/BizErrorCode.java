@@ -28,9 +28,13 @@ public enum BizErrorCode implements BaseErrorCode {
 
     IDENTIFICATION_NOT_MATCH(BIZ, "013", "identification not match"),
 
+    USER_STATUS_ERROR(BIZ, "014", "user status error"),
+
     TOKEN_EXPIRED(BIZ, "020", "session expired"),
 
     TOKEN_MISSING(BIZ, "021", "token missing"),
+
+    TOKEN_UNMATCHED(BIZ, "O22", "token unmatched"),
 
     SYSTEM_ERROR(SYSTEM, "-100", "unknown system error")
 
