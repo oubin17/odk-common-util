@@ -30,11 +30,15 @@ public enum BizErrorCode implements BaseErrorCode {
 
     USER_STATUS_ERROR(BIZ, "014", "user status error"),
 
+    USER_NOT_LOGIN(BIZ, "015", "user not login"),
+
     TOKEN_EXPIRED(BIZ, "020", "session expired"),
 
     TOKEN_MISSING(BIZ, "021", "token missing"),
 
     TOKEN_UNMATCHED(BIZ, "O22", "token unmatched"),
+
+    PERMISSION_DENY(BIZ, "030", "no permission"),
 
     SYSTEM_ERROR(SYSTEM, "-100", "unknown system error")
 
