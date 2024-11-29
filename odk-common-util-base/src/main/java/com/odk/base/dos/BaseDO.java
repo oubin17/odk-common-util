@@ -31,7 +31,7 @@ public abstract class BaseDO extends DO {
 
     @Column(name = "create_by")
     @CreatedBy
-    private String createBy;
+    private Long createBy;
 
     /**
      * 更新时间
@@ -42,7 +42,7 @@ public abstract class BaseDO extends DO {
 
     @Column(name = "update_by")
     @LastModifiedBy
-    private String updateBy;
+    private Long updateBy;
 
     /**
      * 租户ID
@@ -66,11 +66,19 @@ public abstract class BaseDO extends DO {
         this.updateTime = updateTime;
     }
 
-    public void setCreateBy(String createBy) {
+    public Long getCreateBy() {
+        return createBy;
+    }
+
+    public void setCreateBy(Long createBy) {
         this.createBy = createBy;
     }
 
-    public void setUpdateBy(String updateBy) {
+    public Long getUpdateBy() {
+        return updateBy;
+    }
+
+    public void setUpdateBy(Long updateBy) {
         this.updateBy = updateBy;
     }
 

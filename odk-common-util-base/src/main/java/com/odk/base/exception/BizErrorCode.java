@@ -16,32 +16,33 @@ import static com.odk.base.constant.ErrorTypes.*;
  */
 public enum BizErrorCode implements BaseErrorCode {
 
-    SUCCESS(SUCCEED, "000", "success"),
+    SUCCESS(SUCCEED, "000", "成功"),
 
-    PARAM_ILLEGAL(BIZ, "001", "request param illegal"),
+    PARAM_ILLEGAL(BIZ, "001", "请求参数非法"),
 
+    USER_HAS_EXISTED(BIZ, "010", "用户已经存在"),
 
-    USER_HAS_EXISTED(BIZ, "010", "user has existed"),
+    LOGIN_ID_DUPLICATE(BIZ, "011", "登录ID重复"),
 
-    LOGIN_ID_DUPLICATE(BIZ, "011", "login id duplicate"),
-    USER_NOT_EXIST(BIZ, "012", "user not exist"),
+    USER_NOT_EXIST(BIZ, "012", "用户不存在"),
 
-    IDENTIFICATION_NOT_MATCH(BIZ, "013", "identification not match"),
+    IDENTIFICATION_NOT_MATCH(BIZ, "013", "密码不匹配"),
 
-    USER_STATUS_ERROR(BIZ, "014", "user status error"),
+    USER_STATUS_ERROR(BIZ, "014", "用户状态异常"),
 
-    USER_NOT_LOGIN(BIZ, "015", "user not login"),
+    USER_NOT_LOGIN(BIZ, "015", "用户未登录"),
 
-    TOKEN_EXPIRED(BIZ, "020", "session expired"),
+    TOKEN_EXPIRED(BIZ, "020", "Token过期"),
 
-    TOKEN_MISSING(BIZ, "021", "token missing"),
+    TOKEN_MISSING(BIZ, "021", "Token缺失"),
 
-    TOKEN_UNMATCHED(BIZ, "O22", "token unmatched"),
+    TOKEN_UNMATCHED(BIZ, "O22", "Token不匹配"),
 
-    PERMISSION_DENY(BIZ, "030", "no permission"),
+    PERMISSION_DENY(BIZ, "030", "暂无权限"),
 
-    SYSTEM_ERROR(SYSTEM, "-100", "unknown system error")
+    VERIFY_CODE_UNMATCHED(BIZ, "040", "验证码不匹配"),
 
+    SYSTEM_ERROR(SYSTEM, "-100", "未知系统异常")
 
     ;
 
