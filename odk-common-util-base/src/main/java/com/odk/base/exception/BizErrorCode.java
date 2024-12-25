@@ -36,7 +36,7 @@ public enum BizErrorCode implements BaseErrorCode {
 
     TOKEN_MISSING(BIZ, "021", "Token缺失"),
 
-    TOKEN_UNMATCHED(BIZ, "O22", "Token不匹配"),
+    TOKEN_UNMATCHED(BIZ, "022", "Token不匹配"),
 
     PERMISSION_DENY(BIZ, "030", "暂无权限"),
 

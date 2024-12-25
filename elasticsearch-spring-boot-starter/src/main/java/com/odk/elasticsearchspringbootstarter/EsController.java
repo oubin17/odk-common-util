@@ -1,10 +1,8 @@
 //package com.odk.elasticsearchspringbootstarter;
 //
+//import co.elastic.clients.elasticsearch.core.IndexRequest;
 //import com.alibaba.fastjson.JSONObject;
-//import org.elasticsearch.action.index.IndexRequest;
 //import org.elasticsearch.client.RequestOptions;
-//import org.elasticsearch.client.RestHighLevelClient;
-//import org.elasticsearch.xcontent.XContentType;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.web.bind.annotation.GetMapping;
 //import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,9 +23,6 @@
 //@RequestMapping("/es")
 //public class EsController {
 //
-//
-//    @Autowired
-//    private RestHighLevelClient restHighLevelClient;
 //
 //    @GetMapping
 //    public void add() {
