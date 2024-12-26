@@ -1,6 +1,8 @@
 package com.odk.base.exception;
 
 
+import org.apache.commons.lang3.StringUtils;
+
 /**
  * AssertUtil
  *
@@ -59,6 +61,24 @@ public class AssertUtil {
     public static void isFalse(boolean expression, BizErrorCode errorCode) {
         if (expression) {
             throw new BizException(errorCode);
+        }
+    }
+
+    public static void isNotEmpty(String str, String message) {
+        if (StringUtils.isEmpty(str)) {
+            throw new BizException(BizErrorCode.PARAM_ILLEGAL, message);
+        }
+    }
+
+    public static void isNotEmpty(String str, BizErrorCode errorCode, String message) {
+        if (StringUtils.isEmpty(str)) {
+            throw new BizException(errorCode, message);
+        }
+    }
+
+    public static void isEmpty(String str, BizErrorCode errorCode, String message) {
+        if (StringUtils.isNotEmpty(str)) {
+            throw new BizException(errorCode, message);
         }
     }
 }

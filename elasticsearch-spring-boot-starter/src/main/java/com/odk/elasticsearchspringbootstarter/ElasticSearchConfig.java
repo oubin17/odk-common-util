@@ -35,9 +35,6 @@ import org.springframework.data.elasticsearch.core.convert.ElasticsearchConverte
 @SpringBootConfiguration
 public class ElasticSearchConfig {
 
-    @Value("${spring.odk.elasticsearch.host-and-port}")
-    private String hostAndPort;
-
 //
 //    @Bean
 //    public RestClient restClient() {
