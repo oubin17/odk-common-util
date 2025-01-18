@@ -12,7 +12,7 @@ import org.apache.commons.lang3.StringUtils;
  */
 public enum UserStatusEnum implements IEnum {
 
-    NORMAL("1", "正常"),
+    NORMAL("0", "正常"),
 
     FROZEN("2", "冻结"),
 

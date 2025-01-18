@@ -3,11 +3,15 @@ package com.odk.base.util;
 import com.odk.base.exception.BizErrorCode;
 import com.odk.base.exception.BizException;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.text.PDFTextStripper;
+import org.apache.poi.hwpf.HWPFDocument;
 import org.apache.poi.hwpf.extractor.WordExtractor;
 import org.apache.poi.ooxml.POIXMLDocument;
 import org.apache.poi.ooxml.extractor.POIXMLTextExtractor;
 import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.xwpf.extractor.XWPFWordExtractor;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -37,7 +41,7 @@ public class FileUtil {
         File file = new File(filePath);
         try {
             //路径是个文件且不为空时删除文件
-            if(file.isFile()&&file.exists()){
+            if (file.isFile() && file.exists()) {
                 file.delete();
             }
         } catch (Exception e) {
@@ -91,25 +95,66 @@ public class FileUtil {
      * @throws IOException
      */
     public static String getFileContents(String filePath) throws IOException {
-        String buffer = "";
-        try {
-            if (filePath.endsWith(".doc")) {
-                InputStream is = Files.newInputStream(new File(filePath).toPath());
-                WordExtractor ex = new WordExtractor(is);
-                buffer = ex.getText();
-                ex.close();
-            } else if (filePath.endsWith(".docx")) {
-                OPCPackage opcPackage = POIXMLDocument.openPackage(filePath);
-                POIXMLTextExtractor extractor = new XWPFWordExtractor(opcPackage);
-                buffer = extractor.getText();
-                extractor.close();
+        try (FileInputStream fis = new FileInputStream(filePath)) {
+            if (filePath.endsWith(".docx")) {
+                return getDocxContent(fis);
+            } else if (filePath.endsWith(".doc")) {
+               return getDocContent(fis);
+            } else if (filePath.endsWith(".pdf")) {
+                return getPdfContent(filePath);
             }
-        } catch (Exception e) {
+        } catch (IOException e) {
             logger.error("获取文件内容发生异常：", e);
-
         }
-        return buffer;
+        return "";
     }
+
+    /**
+     * 获取docx文件内容
+     *
+     * @param fis
+     * @return
+     * @throws IOException
+     */
+    private static String getDocxContent(FileInputStream fis) throws IOException {
+        XWPFDocument document = new XWPFDocument(fis);
+        XWPFWordExtractor extractor = new XWPFWordExtractor(document);
+        String text = String.valueOf(extractor.getText());
+        extractor.close();
+        document.close();
+        return text;
+    }
+
+    /**
+     * 获取doc文件内容
+     *
+     * @param fis
+     * @return
+     * @throws IOException
+     */
+    private static String getDocContent(FileInputStream fis) throws IOException {
+        HWPFDocument document = new HWPFDocument(fis);
+        WordExtractor extractor = new WordExtractor(document);
+        String text = String.valueOf(extractor.getText());
+        document.close();
+        return text;
+    }
+
+    /**
+     * 获取pdf文件内容
+     *
+     * @param filePath
+     * @return
+     * @throws IOException
+     */
+    private static String getPdfContent(String filePath) throws IOException {
+        PDDocument document = PDDocument.load(new File(filePath));
+        PDFTextStripper pdfStripper = new PDFTextStripper();
+        String text = String.valueOf(pdfStripper.getText(document));
+        document.close();
+        return text;
+    }
+
 
     /**
      * 文件名

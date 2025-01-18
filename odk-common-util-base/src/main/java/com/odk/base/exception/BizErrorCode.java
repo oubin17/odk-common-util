@@ -32,6 +32,10 @@ public enum BizErrorCode implements BaseErrorCode {
 
     USER_NOT_LOGIN(BIZ, "015", "用户未登录"),
 
+    IDENTIFICATION_SAME(BIZ, "016", "新旧密码一致"),
+
+    SESSION_UNMATCHED(BIZ,"017", "Session不匹配"),
+
     TOKEN_EXPIRED(BIZ, "020", "Token过期"),
 
     TOKEN_MISSING(BIZ, "021", "Token缺失"),

@@ -2,6 +2,7 @@ package com.odk.base.dos;
 
 import com.odk.base.listener.TenantEntityListener;
 import jakarta.persistence.*;
+import org.hibernate.annotations.GenericGenerator;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
@@ -22,6 +23,12 @@ import java.time.LocalDateTime;
 public abstract class BaseDO extends DO {
 
     private static final long serialVersionUID = -5695130590258342820L;
+
+    @Id
+    @GeneratedValue(generator = "user-uuid")
+    @GenericGenerator(name = "user-uuid", strategy = "com.odk.base.dos.idgenerate.CustomIDGenerator")
+    private String id;
+
     /**
      * 创建时间
      */
@@ -49,6 +56,15 @@ public abstract class BaseDO extends DO {
      */
     @Column(name = "tenant_id")
     private String tenantId;
+
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public LocalDateTime getCreateTime() {
         return createTime;
