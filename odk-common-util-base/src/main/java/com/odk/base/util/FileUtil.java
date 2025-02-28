@@ -164,7 +164,7 @@ public class FileUtil {
      * @return
      */
     public static String generateFullFileName(String baseFilePath, String uniqueFileId, String fileName) {
-        return baseFilePath + "_" + uniqueFileId + "_" + fileName;
+        return baseFilePath + generateFileName(uniqueFileId, fileName);
     }
 
     /**
@@ -175,6 +175,6 @@ public class FileUtil {
      * @return
      */
     public static String generateFileName(String uniqueFileId, String fileName) {
-        return uniqueFileId + "_" + fileName;
+        return "_" + uniqueFileId + "_" + fileName;
     }
 }

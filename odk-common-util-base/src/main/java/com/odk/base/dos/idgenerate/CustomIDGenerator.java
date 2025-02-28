@@ -1,7 +1,5 @@
 package com.odk.base.dos.idgenerate;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.odk.base.dos.BaseDO;
 import com.odk.base.idgenerator.SnowflakeIdUtil;
 import org.hibernate.MappingException;
@@ -20,13 +18,22 @@ import java.io.Serializable;
 public class CustomIDGenerator implements IdentifierGenerator {
 
     @Override
-    public Serializable generate(SharedSessionContractImplementor session, Object object) throws MappingException {
-        //这里如果Object中的id不为空，则直接使用object中的id，实现逻辑待优化
-        BaseDO baseDO = (BaseDO)object;
-        if (null == baseDO.getId()) {
-            return String.valueOf(SnowflakeIdUtil.nextId());
-        } else {
-            return baseDO.getId();
+    public Serializable generate(SharedSessionContractImplementor session, Object object) {
+        // 1. 增加类型安全校验
+        if (!(object instanceof BaseDO)) {
+            throw new IllegalArgumentException("Unsupported object type: " + object.getClass().getName());
         }
+        BaseDO baseDO = (BaseDO) object;
+        // 2. 优化空值判断逻辑
+        if (baseDO.getId() == null) {
+            // 3. 明确异常处理逻辑
+            try {
+                return String.valueOf(SnowflakeIdUtil.nextId());
+            } catch (Exception e) {
+                throw new MappingException("Snowflake ID generation failed", e);
+            }
+        }
+        return baseDO.getId();
     }
 }
+
