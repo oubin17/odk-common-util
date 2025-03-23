@@ -85,6 +85,25 @@ public class RedisUtil {
     }
 
     /**
+     * 对指定 key 的值进行递增（适用于整数值）
+     * @param key 键
+     * @return 递增后的值（当key不存在时会初始化为0后执行操作）
+     */
+    public Long incr(String key) {
+        return redisTemplate.opsForValue().increment(key, 1L);
+    }
+
+    /**
+     * 对指定 key 的值进行递增（适用于整数值）
+     * @param key 键
+     * @param delta 递增因子（必须>=0）
+     * @return 递增后的值（当key不存在时会初始化为0后执行操作）
+     */
+    public Long incrBy(String key, long delta) {
+        return redisTemplate.opsForValue().increment(key, delta);
+    }
+
+    /**
      * Hash - 设置哈希表的值
      */
     public void hmSet(String key, Map<String, Object> hashValues) {
