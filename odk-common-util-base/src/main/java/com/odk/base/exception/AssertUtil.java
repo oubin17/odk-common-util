@@ -94,4 +94,18 @@ public class AssertUtil {
         }
     }
 
+
+    public static void notEqual(String str1, String str2, BizErrorCode errorCode, String message) {
+        if (StringUtils.equals(str1, str2)) {
+            throw new BizException(errorCode, message);
+        }
+    }
+
+    public static void notEqual(String str1, String str2, BizErrorCode errorCode) {
+        if (StringUtils.equals(str1, str2)) {
+            throw new BizException(errorCode);
+        }
+    }
+
+
 }
