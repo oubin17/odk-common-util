@@ -12,9 +12,20 @@ import org.apache.commons.lang3.StringUtils;
  */
 public enum IdentificationTypeEnum implements IEnum {
 
+    /**
+     * 密码
+     */
     PASSWORD("1", "PASSWORD"),
 
-    SECURITY_QUESTION("2", "SECURITY_QUESTION")
+    /**
+     * 验证码
+     */
+    VERIFICATION_CODE("2", "VERIFICATION_CODE"),
+
+    /**
+     * 安全问题
+     */
+    SECURITY_QUESTION("3", "SECURITY_QUESTION")
     ;
 
     private final String code;

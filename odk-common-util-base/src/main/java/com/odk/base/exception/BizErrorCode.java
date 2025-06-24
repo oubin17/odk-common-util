@@ -20,6 +20,8 @@ public enum BizErrorCode implements BaseErrorCode {
 
     PARAM_ILLEGAL(BIZ, "001", "请求参数非法"),
 
+    CONCURRENT_REQUEST(BIZ, "002", "请求过于频繁，请稍后重试"),
+
     USER_HAS_EXISTED(BIZ, "010", "用户已经存在"),
 
     LOGIN_ID_DUPLICATE(BIZ, "011", "登录ID重复"),
@@ -45,6 +47,18 @@ public enum BizErrorCode implements BaseErrorCode {
     PERMISSION_DENY(BIZ, "030", "暂无权限"),
 
     VERIFY_CODE_UNMATCHED(BIZ, "040", "验证码不匹配"),
+
+    VERIFY_CODE_EXPIRED(BIZ, "041", "验证码已过期"),
+
+    VERIFY_CODE_EXISTED(BIZ, "042", "验证码已存在"),
+
+    VERIFY_CODE_COMPARE_MAX_TIMES(BIZ, "043", "单个验证码已超过最大验证次数"),
+
+    VERIFY_CODE_SEND_MAX_TIMES(BIZ, "044", "验证码已超过最大发送次数"),
+
+    VERIFY_CODE_UNIQUE_ERROR(BIZ, "045", "验证码唯一键错误"),
+
+    VERIFY_CODE_NOT_EXIST(BIZ, "046", "验证码不存在"),
 
     SYSTEM_ERROR(SYSTEM, "-100", "未知系统异常")
 
