@@ -64,6 +64,17 @@ public class ServiceResponse<T> extends BaseResponse {
         response.setErrorContext(errorContext);
         return response;
     }
+
+    public static <T> ServiceResponse<T> valueOfError(String errorType, String errorCode, String errorContext,  Map<String, Object> extendInfo) {
+        ServiceResponse<T> response = new ServiceResponse<>();
+        response.setSuccess(false);
+        response.setErrorType(errorType);
+        response.setErrorCode(errorCode);
+        response.setErrorContext(errorContext);
+        response.setExtendInfo(extendInfo);
+        return response;
+    }
+
     public static <T> ServiceResponse<T> valueOf(ServiceResponse preResponse) {
         ServiceResponse<T> response = new ServiceResponse<>();
         response.setSuccess(preResponse.isSuccess());
