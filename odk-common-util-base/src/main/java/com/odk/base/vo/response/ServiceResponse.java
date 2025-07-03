@@ -2,6 +2,7 @@ package com.odk.base.vo.response;
 
 import com.odk.base.exception.BizErrorCode;
 
+import java.io.Serial;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,12 +16,16 @@ import java.util.Map;
  */
 public class ServiceResponse<T> extends BaseResponse {
 
+    @Serial
     private static final long serialVersionUID = -6642539633697397474L;
 
+    /**
+     * 系统业务数据返回
+     */
     private T data;
 
     /**
-     * extend info returned
+     * 允许系统在出现错误时，返回额外信息给到调用方。
      */
     private Map<String, Object> extendInfo;
 
