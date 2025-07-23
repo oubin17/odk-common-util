@@ -1,5 +1,6 @@
 package com.odk.base.listener;
 
+import com.odk.base.context.TenantIdContext;
 import com.odk.base.dos.BaseDO;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Transient;
@@ -17,14 +18,14 @@ import org.springframework.stereotype.Component;
 public class TenantEntityListener {
 
     // 使用 @Value 获取配置文件中的租户 ID
-    @Transient // 非持久化字段，用于注入 Spring 的配置值
-    @Value("${tenant.id}")
-    private String tenantId;
+//    @Transient // 非持久化字段，用于注入 Spring 的配置值
+//    @Value("${tenant.id}")
+//    private String tenantId;
 
     @PrePersist
     public void prePersist(BaseDO entity) {
         if (entity.getTenantId() == null) {
-            entity.setTenantId(tenantId); // 自动填充租户 ID
+            entity.setTenantId(TenantIdContext.getTenantId()); // 自动填充租户 ID
         }
     }
 }
