@@ -54,7 +54,7 @@ public abstract class BaseDO extends DO {
     /**
      * 租户ID
      */
-    @Column(name = "tenant_id")
+    @Column(name = "tenant_id", nullable = false)
     private String tenantId;
 
 

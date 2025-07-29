@@ -22,6 +22,8 @@ public enum BizErrorCode implements BaseErrorCode {
 
     CONCURRENT_REQUEST(BIZ, "002", "请求过于频繁，请稍后重试"),
 
+    TENANT_ILLEGAL(BIZ, "003", "租户非法"),
+
     USER_HAS_EXISTED(BIZ, "010", "用户已经存在"),
 
     LOGIN_ID_DUPLICATE(BIZ, "011", "登录ID重复"),
