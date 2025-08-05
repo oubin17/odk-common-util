@@ -28,6 +28,12 @@ public class DistributedLockService {
 
     /**
      * 获取锁（阻塞直到成功）
+     * 这个方法是阻塞式的，如果锁被其他线程持有，当前线程会一直阻塞等待
+     * 只有在锁被释放后，等待的线程才能获取到锁
+     *
+     * 能够预估业务执行时间的场景
+     * 需要严格控制锁持有时间的情况
+     * 防止死锁的场景（通过设置固定过期时间）
      *
      * @param lockKey   锁名称
      * @param leaseTime 锁自动释放时间（单位：秒）
@@ -37,7 +43,17 @@ public class DistributedLockService {
         lock.lock(leaseTime, TimeUnit.SECONDS);
     }
 
-    // 新增支持自动续期的方法（默认30秒看门狗）
+    /**
+     * 不需要指定过期时间，使用 Redisson 的看门狗（Watchdog）机制
+     * 默认每30秒自动续期一次锁（Redisson 默认值）
+     * 只要持有锁的线程还在运行，锁就会一直保持
+     *
+     * 业务执行时间不确定的场景
+     * 需要确保业务完整执行不被中断的场景
+     * 不希望手动管理锁过期时间的情况
+     *
+     * @param lockKey
+     */
     public void lockWithWatchdog(String lockKey) {
         RLock lock = redissonClient.getLock(lockKey);
         lock.lock(); // 不指定leaseTime启用自动续期

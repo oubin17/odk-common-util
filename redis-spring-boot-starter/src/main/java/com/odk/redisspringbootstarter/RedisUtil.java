@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -45,6 +46,32 @@ public class RedisUtil {
      */
     public Object get(String key) {
         return redisTemplate.opsForValue().get(key);
+    }
+
+    /**
+     * 获取指定key的值，并转换为指定类型
+     * @param key Redis键
+     * @param clazz 返回值的类型Class
+     * @return 指定类型的值，如果不存在则返回null
+     * @param <T> 泛型类型
+     */
+    public <T> T get(String key, Class<T> clazz) {
+        Object value = get(key);
+        if (clazz.isInstance(value)) {
+            return clazz.cast(value);
+        }
+        return null;
+    }
+
+    /**
+     * 获取指定key的值，并返回Optional包装的指定类型
+     * @param key Redis键
+     * @param clazz 返回值的类型Class
+     * @return Optional包装的指定类型值
+     * @param <T> 泛型类型
+     */
+    public <T> Optional<T> getOptional(String key, Class<T> clazz) {
+        return Optional.ofNullable(get(key, clazz));
     }
 
     /**
