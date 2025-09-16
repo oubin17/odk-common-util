@@ -4,7 +4,7 @@
 
     <groupId>com.odk</groupId>
     <artifactId>odk-common-util-base</artifactId>
-    <version>3.0.2-SNAPSHOT</version>
+    <version>3.0.2-LUSHI-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>odk-common-util-base</name>

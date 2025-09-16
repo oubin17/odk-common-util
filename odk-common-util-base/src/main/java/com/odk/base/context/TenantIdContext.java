@@ -29,7 +29,7 @@ public class TenantIdContext {
      */
     private static final ThreadLocal<String> TENANT_ID_CONTEXT = new ThreadLocal<>();
 
-    private static final Set<String> TENANT_IDS = Set.of("DEFAULT", "ODK-COUNTDOWN");
+    private static final Set<String> TENANT_IDS = Set.of("DEFAULT", "ODK-LUSHI");
 
     /**
      * 默认租户
