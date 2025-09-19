@@ -1,5 +1,6 @@
 package com.odk.base.vo.request;
 
+import java.io.Serial;
 import java.util.Objects;
 
 /**
@@ -9,14 +10,16 @@ import java.util.Objects;
  * @version: 1.0
  * @author: oubin on 2024/1/20
  */
-public class PageRequest extends BaseRequest {
+public class PageParamRequest extends BaseRequest {
+
+    @Serial
     private static final long serialVersionUID = -2560169579099818943L;
 
     // 页码（从 1 开始）
-    private int pageNo = 1;
+    private int page = 1;
 
     // 每页条目数
-    private int pageSize = 10;
+    private int size = 10;
 
     // 排序字段
     private String sortField;
@@ -24,35 +27,45 @@ public class PageRequest extends BaseRequest {
     // 排序方向（ASC 或 DESC）
     private String sortDirection = "ASC";
 
-    public PageRequest() {
+    public PageParamRequest() {
     }
 
-    public PageRequest(int pageNo, int pageSize) {
-        setPageNo(pageNo);
-        setPageSize(pageSize);
+    public PageParamRequest(int page, int size) {
+        setPage(page);
+        setSize(size);
     }
 
-    public PageRequest(int pageNo, int pageSize, String sortField, String sortDirection) {
-        setPageNo(pageNo);
-        setPageSize(pageSize);
+    public PageParamRequest(int page, int size, String sortField, String sortDirection) {
+        setPage(page);
+        setSize(size);
         setSortField(sortField);
         setSortDirection(sortDirection);
     }
 
-    public int getPageNo() {
-        return pageNo;
+    public int getPage() {
+        return page;
     }
 
-    public void setPageNo(int pageNo) {
-        this.pageNo = Math.max(pageNo, 1);
+    /**
+     * 首页码为 0
+     *
+     * @param page
+     */
+    public void setPage(int page) {
+        this.page = Math.max(page, 0);
     }
 
-    public int getPageSize() {
-        return pageSize;
+    public int getSize() {
+        return size;
     }
 
-    public void setPageSize(int pageSize) {
-        this.pageSize = Math.max(pageSize, 1);
+    /**
+     * 每页条目数，最小值为 1
+     *
+     * @param size
+     */
+    public void setSize(int size) {
+        this.size = Math.max(size, 1);
     }
 
     public String getSortField() {
@@ -80,7 +93,7 @@ public class PageRequest extends BaseRequest {
      * @return 偏移量
      */
     public int getOffset() {
-        return (pageNo - 1) * pageSize;
+        return (page - 1) * size;
     }
 
     /**
@@ -95,8 +108,8 @@ public class PageRequest extends BaseRequest {
     @Override
     public String toString() {
         return "PageRequest{" +
-                "pageNo=" + pageNo +
-                ", pageSize=" + pageSize +
+                "pageNo=" + page +
+                ", pageSize=" + size +
                 ", sortField='" + sortField + '\'' +
                 ", sortDirection='" + sortDirection + '\'' +
                 '}';
@@ -106,16 +119,16 @@ public class PageRequest extends BaseRequest {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        PageRequest that = (PageRequest) o;
-        return pageNo == that.pageNo &&
-                pageSize == that.pageSize &&
+        PageParamRequest that = (PageParamRequest) o;
+        return page == that.page &&
+                size == that.size &&
                 Objects.equals(sortField, that.sortField) &&
                 Objects.equals(sortDirection, that.sortDirection);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(pageNo, pageSize, sortField, sortDirection);
+        return Objects.hash(page, size, sortField, sortDirection);
     }
 
 }
