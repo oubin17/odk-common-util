@@ -1,5 +1,7 @@
 package com.odk.redisspringbootstarter;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Component;
@@ -20,6 +22,10 @@ import java.util.concurrent.TimeUnit;
 @Component
 public class RedisUtil {
 
+
+    private static final Logger log = LoggerFactory.getLogger(RedisUtil.class);
+
+
     private final RedisTemplate<String, Object> redisTemplate;
 
 
@@ -32,6 +38,7 @@ public class RedisUtil {
      */
     public void set(String key, Object value) {
         redisTemplate.opsForValue().set(key, value);
+        log.info("set redis key: {}, value: {}", key, value);
     }
 
     /**
@@ -39,13 +46,16 @@ public class RedisUtil {
      */
     public void set(String key, Object value, long timeout, TimeUnit unit) {
         redisTemplate.opsForValue().set(key, value, timeout, unit);
+        log.info("set redis key: {}, value: {}, timeout: {}, unit: {}", key, value, timeout, unit);
     }
 
     /**
      * 获取指定 key 的值
      */
     public Object get(String key) {
-        return redisTemplate.opsForValue().get(key);
+        Object o = redisTemplate.opsForValue().get(key);
+        log.info("get redis key: {}, value: {}", key, o);
+        return o;
     }
 
     /**
@@ -78,6 +88,7 @@ public class RedisUtil {
      * 删除指定 key
      */
     public boolean delete(String key) {
+        log.info("delete redis key: {}", key);
         return Boolean.TRUE.equals(redisTemplate.delete(key));
     }
 
@@ -92,6 +103,7 @@ public class RedisUtil {
      * 设置 key 的过期时间
      */
     public boolean expire(String key, long timeout, TimeUnit unit) {
+        log.info("set redis key: {}, timeout: {}, unit: {}", key, timeout, unit);
         return Boolean.TRUE.equals(redisTemplate.expire(key, timeout, unit));
     }
 
@@ -117,6 +129,7 @@ public class RedisUtil {
      * @return 递增后的值（当key不存在时会初始化为0后执行操作）
      */
     public Long incr(String key) {
+        log.info("incr redis key: {}", key);
         return redisTemplate.opsForValue().increment(key, 1L);
     }
 
@@ -127,6 +140,7 @@ public class RedisUtil {
      * @return 递增后的值（当key不存在时会初始化为0后执行操作）
      */
     public Long incrBy(String key, long delta) {
+        log.info("incrBy redis key: {}, delta: {}", key, delta);
         return redisTemplate.opsForValue().increment(key, delta);
     }
 
