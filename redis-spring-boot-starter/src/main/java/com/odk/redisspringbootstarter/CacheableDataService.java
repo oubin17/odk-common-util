@@ -34,7 +34,7 @@ public class CacheableDataService {
      * @return
      * @param <T>
      */
-    public <T> T getOrCreateWithExpireTime(String redisKey, String lockKey, String dbKey,
+    public <T> T getOrCreate(String redisKey, String lockKey, String dbKey,
                              Function<String, T> databaseGetter) {
         return getOrCreate(
                 redisKey,
@@ -46,6 +46,31 @@ public class CacheableDataService {
         );
     }
 
+
+    /**
+     * 访问缓存数据，如不存在，写缓存带默认过期时间
+     *
+     * @param redisKey
+     * @param dbKey
+     * @param databaseGetter
+     * @return
+     * @param <T>
+     */
+    public <T> T getOrCreate(String redisKey, long timeout, TimeUnit unit, String lockKey, String dbKey, Function<String, T> databaseGetter) {
+        return getOrCreate(
+                redisKey,
+                lockKey,
+                1L,
+                3L,
+                dbKey,
+                databaseGetter,
+                timeout,
+                unit
+        );
+    }
+
+
+
     /**
      * 设置缓存，无过期时间
      *
@@ -56,8 +81,7 @@ public class CacheableDataService {
      * @return
      * @param <T>
      */
-    public <T> T getOrCreateWithNoExpiration(String redisKey, String lockKey, String dbKey,
-                                           Function<String, T> databaseGetter) {
+    public <T> T getOrCreateNoExpire(String redisKey, String lockKey, String dbKey, Function<String, T> databaseGetter) {
         return getOrCreate(
                 redisKey,
                 lockKey,
