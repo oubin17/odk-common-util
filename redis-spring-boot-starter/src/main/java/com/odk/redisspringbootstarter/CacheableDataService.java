@@ -5,8 +5,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
-import java.util.function.Function;
+import java.util.function.Supplier;
 
 /**
  * CacheableDataService
@@ -29,20 +30,19 @@ public class CacheableDataService {
      * 访问缓存数据，如不存在，写缓存带默认过期时间
      *
      * @param redisKey
-     * @param dbKey
      * @param databaseGetter
      * @return
      * @param <T>
      */
-    public <T> T getOrCreate(String redisKey, String lockKey, String dbKey,
-                             Function<String, T> databaseGetter) {
+    public <T> T getOrCreate(String redisKey, String lockKey, Supplier<T> databaseGetter) {
         return getOrCreate(
                 redisKey,
                 lockKey,
                 1L,
                 3L,
-                dbKey,
-                databaseGetter, 30, TimeUnit.DAYS
+                Duration.ofDays(30),
+                databaseGetter
+
         );
     }
 
@@ -51,21 +51,18 @@ public class CacheableDataService {
      * 访问缓存数据，如不存在，写缓存带默认过期时间
      *
      * @param redisKey
-     * @param dbKey
      * @param databaseGetter
      * @return
      * @param <T>
      */
-    public <T> T getOrCreate(String redisKey, long timeout, TimeUnit unit, String lockKey, String dbKey, Function<String, T> databaseGetter) {
+    public <T> T getOrCreate(String redisKey, String lockKey, Duration duration, Supplier<T> databaseGetter) {
         return getOrCreate(
                 redisKey,
                 lockKey,
                 1L,
                 3L,
-                dbKey,
-                databaseGetter,
-                timeout,
-                unit
+                duration,
+                databaseGetter
         );
     }
 
@@ -76,23 +73,20 @@ public class CacheableDataService {
      *
      * @param redisKey
      * @param lockKey
-     * @param dbKey
      * @param databaseGetter
      * @return
      * @param <T>
      */
-    public <T> T getOrCreateNoExpire(String redisKey, String lockKey, String dbKey, Function<String, T> databaseGetter) {
+    public <T> T getOrCreateNoExpire(String redisKey, String lockKey, Supplier<T> databaseGetter) {
         return getOrCreate(
                 redisKey,
                 lockKey,
                 1L,
                 3L,
-                dbKey,
-                databaseGetter, 0, TimeUnit.SECONDS
+                Duration.ZERO,
+                databaseGetter
         );
     }
-
-
 
     /**
      * 使用分布式锁防止缓存击穿
@@ -100,14 +94,17 @@ public class CacheableDataService {
      * @param redisKey
      * @param waitTime
      * @param leaseTime
-     * @param dbKey
      * @param databaseGetter
-     * @param timeout
-     * @param unit
+     * @param duration
      * @return
      * @param <T>
      */
-    public <T> T getOrCreate(String redisKey, String lockKey, long waitTime, long leaseTime, String dbKey, Function<String, T> databaseGetter, long timeout, TimeUnit unit) {
+    public <T> T getOrCreate(String redisKey,
+                             String lockKey,
+                             long waitTime,
+                             long leaseTime,
+                             Duration duration,
+                             Supplier<T> databaseGetter) {
         // 1. 首先尝试从缓存中获取
         Object value = redisUtil.get(redisKey);
         if (null != value) {
@@ -125,19 +122,22 @@ public class CacheableDataService {
             if (acquired) {
                 try {
                     // 双重检查缓存
-                    value = redisUtil.get(redisKey);;
+                    value = redisUtil.get(redisKey);
                     if (value != null) {
                         return (T) value;
                     }
 
                     // 查询数据库
-                    T fromDatabase = databaseGetter.apply(dbKey);
+                    T fromDatabase = databaseGetter.get();
                     if (fromDatabase != null) {
                         // 写入缓存
-                        if (timeout <= 0) {
+                        if (duration.isZero() || duration.isNegative()) {
                             redisUtil.set(redisKey, fromDatabase);
                         } else {
-                            redisUtil.set(redisKey, fromDatabase, timeout, unit);
+                            // 将 Duration 转换为秒或毫秒
+                            redisUtil.set(redisKey, fromDatabase, duration.getSeconds(), TimeUnit.SECONDS);
+                            // 或者如果需要更高精度:
+                            // redisUtil.set(redisKey, fromDatabase, duration.toMillis(), TimeUnit.MILLISECONDS);
                         }
                         return fromDatabase;
                     }
@@ -159,11 +159,14 @@ public class CacheableDataService {
         }
 
         // 降级处理：直接查询数据库
-        // 查询数据库
-        T fromDatabase = databaseGetter.apply(dbKey);
+        T fromDatabase = databaseGetter.get();
         if (fromDatabase != null) {
             // 写入缓存
-            redisUtil.set(redisKey, fromDatabase, timeout, unit);
+            if (duration.isZero() || duration.isNegative()) {
+                redisUtil.set(redisKey, fromDatabase);
+            } else {
+                redisUtil.set(redisKey, fromDatabase, duration.getSeconds(), TimeUnit.SECONDS);
+            }
             return fromDatabase;
         }
         return null;
