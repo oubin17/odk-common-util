@@ -6,8 +6,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
-import org.springframework.transaction.support.TransactionTemplate;
 
 import javax.sql.DataSource;
 
@@ -75,17 +73,25 @@ public class DataSourceSelector {
      *
      * @return
      */
-    @Bean
-    public DataSourceTransactionManager transactionManager() {
-        DataSourceTransactionManager transactionManager = new DataSourceTransactionManager();
-        transactionManager.setDataSource(dataSource());
-        return transactionManager;
-    }
 
-    @Bean
-    public TransactionTemplate transactionTemplate() {
-        TransactionTemplate transactionTemplate = new TransactionTemplate();
-        transactionTemplate.setTransactionManager(transactionManager());
-        return transactionTemplate;
-    }
+//    @Bean
+//    public PlatformTransactionManager transactionManager() {
+//        // 使用专为JPA设计的事务管理器
+//        return new JpaTransactionManager(entityManagerFactory);
+//    }
+
+
+//    @Bean
+//    public PlatformTransactionManager transactionManager() {
+//        // 使用专为JPA设计的事务管理器
+//        return new JpaTransactionManager(entityManagerFactory);
+//    }
+
+
+//    @Bean
+//    public TransactionTemplate transactionTemplate() {
+//        TransactionTemplate transactionTemplate = new TransactionTemplate();
+//        transactionTemplate.setTransactionManager(transactionManager());
+//        return transactionTemplate;
+//    }
 }
