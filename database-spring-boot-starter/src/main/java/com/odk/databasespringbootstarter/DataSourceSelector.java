@@ -11,6 +11,9 @@ import javax.sql.DataSource;
 
 /**
  * DataSourceChoose
+ * 在定时任务中，jpa 未生效：
+ * 配置覆盖了 Spring Boot 为 JPA 自动配置的 JpaTransactionManager。由于 DataSourceTransactionManager 并非专为 JPA 设计，它可能无法在定时任务等特定场景下正确地将数据库连接（Connection）与 JPA 的 EntityManager 进行同步，导致 save 操作实际上并未与事务关联。
+ * 最直接有效的解决方案是：移除您手动配置的 DataSourceTransactionManager 和 TransactionTemplate Bean。
  *
  * @description:
  * @version: 1.0
