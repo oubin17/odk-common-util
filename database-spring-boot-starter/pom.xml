@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.odk</groupId>
 	<artifactId>database-spring-boot-starter</artifactId>
-	<version>3.0.1-SNAPSHOT</version>
+	<version>3.0.2-SNAPSHOT</version>
 	<name>database-spring-boot-starter</name>
 	<description>database-spring-boot-starter</description>
 	<properties>
@@ -19,6 +19,8 @@
 		<druid>1.2.8</druid>
 		<lombok>1.18.24</lombok>
 		<commons-lang>3.13.0</commons-lang>
+		<mybatis-plus.version>3.5.5</mybatis-plus.version>
+
 	</properties>
 	<dependencies>
 		<dependency>
@@ -34,6 +36,14 @@
 			<artifactId>mysql-connector-j</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+
+		<!-- MyBatis Plus -->
+		<dependency>
+			<groupId>com.baomidou</groupId>
+			<artifactId>mybatis-plus-spring-boot3-starter</artifactId>
+			<version>${mybatis-plus.version}</version>
+		</dependency>
+
 
 
 <!--		<dependency>-->
