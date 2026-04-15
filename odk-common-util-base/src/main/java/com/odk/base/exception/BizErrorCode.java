@@ -66,7 +66,9 @@ public enum BizErrorCode implements BaseErrorCode {
 
     VERIFY_CODE_NOT_EXIST(BIZ, "046", "验证码不存在"),
 
-    SYSTEM_ERROR(SYSTEM, "-100", "未知系统异常")
+    SYSTEM_ERROR(SYSTEM, "-100", "未知系统异常"),
+
+    SIGNING_ERROR(BIZ, "-110", "签名错误"),
 
     ;
 
